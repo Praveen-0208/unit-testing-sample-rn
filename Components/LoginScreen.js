@@ -18,7 +18,7 @@ class LoginScreen extends Component {
   }
 
   handleSubmit() {
-    if (this.state.serialNo !== '' || this.state.password !== '') {
+    if (this.state.serialNo !== '' && this.state.password !== '') {
       if (
         this.state.serialNo === '12345678' &&
         this.state.password === 'samplepwd'
@@ -47,7 +47,7 @@ class LoginScreen extends Component {
         <View style={styles.loginCard}>
           <View style={styles.inputContainer}>
             <Input
-              testID="psnumberTest"
+              testID="serialNoTest"
               placeholder="Serial Number"
               leftIcon={
                 <Image
