@@ -1,10 +1,11 @@
 import React from 'react';
 import renderer, {act} from 'react-test-renderer';
-import LoginScreen from '../Components/LoginScreen';
-
-const tree = renderer.create(<LoginScreen />);
+import LoginScreen from '../src/Components/LoginScreen';
 
 describe('Login Screen Tests', () => {
+  // const store = createStore(loginReducer, false);
+  const tree = renderer.create(<LoginScreen />);
+
   test('Renders an error message if fields are empty', () => {
     const instance = tree.getInstance();
     const serialNo = tree.root.findByProps({testID: 'serialNoTest'}).props;
@@ -46,7 +47,7 @@ describe('Login Screen Tests', () => {
     act(() => loginButton.onPress());
 
     expect(instance.state.error).toBeFalsy();
-    expect(instance.state.loggedIn).toBeTruthy();
     expect(instance.state.errorMsg).toEqual('');
+    expect(instance.props.loggedIn).toBeTruthy();
   });
 });

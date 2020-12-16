@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, Image, Text} from 'react-native';
-import {Input, CheckBox, Button} from 'react-native-elements';
+import {Input, Button} from 'react-native-elements';
 class LoginScreen extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       serialNo: '',
       password: '',
       errorMsg: '',
-      loggedIn: false,
       error: false,
     };
   }
@@ -23,20 +22,21 @@ class LoginScreen extends Component {
         this.state.serialNo === '12345678' &&
         this.state.password === 'samplepwd'
       ) {
-        this.setState({loggedIn: true, error: false, errorMsg: ''});
+        this.setState({error: false, errorMsg: ''});
+        this.props.setLogin(true);
       } else {
         this.setState({
           error: true,
-          loggedIn: false,
           errorMsg: 'Invalid credentials',
         });
+        this.props.setLogin(false);
       }
     } else {
       this.setState({
         error: true,
-        loggedIn: false,
         errorMsg: 'Fill all the fields',
       });
+      this.props.setLogin(false);
     }
   }
 
