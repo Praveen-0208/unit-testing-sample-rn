@@ -9,7 +9,18 @@ class LoginScreen extends Component {
       password: '',
       errorMsg: '',
       error: false,
+      loggedInFlag: this.props.loggedIn,
     };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.loggedIn !== prevState.loggedInFlag) {
+      return {
+        loggedInFlag: nextProps.loggedIn,
+      };
+    } else {
+      return null;
+    }
   }
 
   handleChange(value, fieldName) {
@@ -39,6 +50,10 @@ class LoginScreen extends Component {
       this.props.setLogin(false);
     }
   }
+
+  redirect = () => {
+    console.log('redirecting to homepage');
+  };
 
   render() {
     return (
@@ -76,6 +91,7 @@ class LoginScreen extends Component {
             {this.state.error && (
               <Text testID="msgTest">{this.state.errorMsg}</Text>
             )}
+            {this.state.loggedInFlag && this.redirect()}
             <View style={styles.buttonContainer}>
               <Button
                 title="Login"
